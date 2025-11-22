@@ -1,0 +1,46 @@
+Public Class frmReportes
+
+    Private Sub frmReportes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        cmbTipoReporte.Items.Add("Stock Crítico")
+        cmbTipoReporte.Items.Add("Ventas por Zona")
+        cmbTipoReporte.SelectedIndex = 0
+    End Sub
+
+    Private Sub btnGenerar_Click(sender As Object, e As EventArgs) Handles btnGenerar.Click
+        Dim tipoReporte As String = cmbTipoReporte.SelectedItem.ToString()
+
+        Select Case tipoReporte
+            Case "Stock Crítico"
+                dgvReporte.DataSource = ObtenerStockCritico()
+            Case "Ventas por Zona"
+                dgvReporte.DataSource = ObtenerVentasPorZona()
+        End Select
+    End Sub
+
+    ' Simulación de consulta de stock crítico
+    Private Function ObtenerStockCritico() As DataTable
+        Dim dt As New DataTable()
+        dt.Columns.Add("Producto")
+        dt.Columns.Add("Stock")
+
+        dt.Rows.Add("Pan Integral", 3)
+        dt.Rows.Add("Galletas", 2)
+        dt.Rows.Add("Tortillas", 1)
+
+        Return dt
+    End Function
+
+    ' Simulación de consulta de ventas por zona
+    Private Function ObtenerVentasPorZona() As DataTable
+        Dim dt As New DataTable()
+        dt.Columns.Add("Zona")
+        dt.Columns.Add("Ventas")
+
+        dt.Rows.Add("Norte", 1500)
+        dt.Rows.Add("Sur", 1200)
+        dt.Rows.Add("Centro", 1800)
+
+        Return dt
+    End Function
+
+End Class
